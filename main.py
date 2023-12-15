@@ -14,15 +14,20 @@ tf.random.set_seed(42)
 
 if __name__ == '__main__':
     use_PHT = True
-    detection_method_name = 'adwin'
+    detection_method_name = 'page-hinkley'
     names = ['RobinWilliams', 'TomHulce', 'RobertoBenigni', 'TomHanks', 'LiamNeeson', 'KirstieAlley',
              'AlfreWoodard', 'StevenSeagal', 'SharonOsbourne', 'RoseanneBarr', 'RobertDavi', 'MarkHamill',
              'JohnGoodman', 'JesseVentura', 'JeffGoldblum', 'FrancesConroy', 'ColmMeaney', 'AnjelicaHuston',
-             'RonHoward', 'TonyDanza', 'Unknown']
+             'RonHoward', 'TonyDanza', 'MariaConchitaAlonso', 'MelGibson', 'MelanieGriffith', 'NathanLane',
+             'PatrickSwayze', 'RobertPicardo', 'RolandEmmerich', 'SteveJobs', 'StevenBauer', 'PaulHaggis',
+             'AlanRuck', 'BoDerek', 'BobSaget', 'DenisLeary', 'TonyTodd', 'TonyShalhoub', 'AdamArkin',
+             'HulkHogan', 'JohnMalkovich', 'JohnTurturro', 'JohnTravolta', 'KarenAllen', 'KurtFuller',
+             'MichaelEmerson', 'MichaelKeaton', 'MickeyRourke', 'Rekha', 'ReneRusso', 'RowanAtkinson',
+             'SteveBuscemi', 'Unknown']
     names.sort()
     # organize_datasets(names)
 
-    if os.path.isfile("./model.h5"):
+    if os.path.isfile("results_50_people/model.h5"):
         custom_vgg_face_model = loadModel("./model")
     else:
         train_dataset = image_dataset_from_directory("CACD2000/train", shuffle=True, batch_size=32,
@@ -77,19 +82,24 @@ if __name__ == '__main__':
     test_confusion_matrix = confusion_matrix(true_labels, predictions, labels=names)
     print("Computing classification report")
     test_classification_report = classification_report(true_labels, predictions, digits=3)
-    with open("results_without_detection.txt" if not use_PHT else "results_with_" + detection_method_name + ".txt", "w") as result_file:
+    with open("results_without_detection.txt" if not use_PHT else "results_with_" + detection_method_name + ".txt",
+              "w") as result_file:
         result_file.write("Test confusion matrix:\n")
         result_file.write(str(test_confusion_matrix) + "\n")
         result_file.write("Test classification report:\n")
         result_file.write(str(test_classification_report) + "\n")
     test_confusion_matrix_plot = ConfusionMatrixDisplay(test_confusion_matrix, display_labels=names)
     test_confusion_matrix_plot.plot()
-    plt.title("Test Confusion Matrix without detection" if not use_PHT else "Test Confusion Matrix with " + detection_method_name)
-    plt.savefig("test_confusion_matrix_without_detection.png" if not use_PHT else "test_confusion_matrix_with_" + detection_method_name + ".png")
+    plt.title(
+        "Test Confusion Matrix without detection" if not use_PHT else "Test Confusion Matrix with " + detection_method_name)
+    plt.savefig(
+        "test_confusion_matrix_without_detection.png" if not use_PHT else "test_confusion_matrix_with_" + detection_method_name + ".png")
     plt.close()
-    with open("predictions_without_detection.pkl" if not use_PHT else "predictions_with_" + detection_method_name + ".pkl", 'wb') as file:
+    with open(
+            "predictions_without_detection.pkl" if not use_PHT else "predictions_with_" + detection_method_name + ".pkl",
+            'wb') as file:
         pickle.dump(predictions, file)
         file.close()
-    with open("results/true_labels.pkl", 'wb') as file:
+    with open("results_20_people/true_labels.pkl", 'wb') as file:
         pickle.dump(true_labels, file)
         file.close()

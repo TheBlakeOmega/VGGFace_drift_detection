@@ -16,7 +16,7 @@ def trainVGGFaceModel(train_dataset, save_file_name=None):
     model = VGGFace(model='vgg16', include_top=False, input_shape=(224, 224, 3))
     model.trainable = False
     # last_layer = model.get_layer('avg_pool').output
-    num_people = 21
+    num_people = 51
     inputs = tf.keras.Input(shape=(224, 224, 3))
     x = data_augmentation(inputs)
     x = model(x)

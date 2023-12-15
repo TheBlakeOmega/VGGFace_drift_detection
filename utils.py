@@ -19,7 +19,7 @@ def organize_datasets(selected_names):
             dict_of_lists[label] = []
         dict_of_lists[label].append(file_path)
 
-    max_people = 20
+    max_people = 50
     processed = 0
     unknown_people_processed = 0
     os.mkdir("./CACD2000/train/unknown")
@@ -31,10 +31,12 @@ def organize_datasets(selected_names):
             ordered_list = sorted(dict_of_lists[name], key=lambda x: itemgetter(0)(x.split("_")))
             for i in range(tran_img_number):
                 photo = preparePhotoTrain("CACD2000/CACD2000/" + ordered_list[i])
-                savePhoto("CACD2000/train/" + name + "/" + ordered_list[i], photo)
+                if photo is not None:
+                    savePhoto("CACD2000/train/" + name + "/" + ordered_list[i], photo)
             for i in range(tran_img_number, len(dict_of_lists[name])):
                 photo = preparePhotoTrain("CACD2000/CACD2000/" + ordered_list[i])
-                savePhoto("CACD2000/stream/" + ordered_list[i], photo)
+                if photo is not None:
+                    savePhoto("CACD2000/stream/" + ordered_list[i], photo)
             processed += 1
             if processed == max_people:
                 break
@@ -43,18 +45,22 @@ def organize_datasets(selected_names):
             if unknown_people_processed % 19 == 0:
                 random_image = random.choice(dict_of_lists[name])
                 photo = preparePhotoTrain("CACD2000/CACD2000/" + random_image)
-                savePhoto("CACD2000/train/unknown/" + random_image, photo)
+                if photo is not None:
+                    savePhoto("CACD2000/train/unknown/" + random_image, photo)
 
 
 def preparePhotoTrain(path):
     global face_detector
     photo = imread(path)
     face_detected = face_detector.detect_faces(photo)
-    x1, y1, width, length = face_detected[0]['box']
-    x2, y2 = x1 + width, y1 + length
-    cropped_photo = photo[y1:y2, x1:x2]
-    cropped_photo = cv2.resize(cropped_photo, (224, 224), interpolation=cv2.INTER_AREA)
-    return cropped_photo
+    if len(face_detected) != 0:
+        x1, y1, width, length = face_detected[0]['box']
+        x2, y2 = x1 + width, y1 + length
+        cropped_photo = photo[y1:y2, x1:x2]
+        cropped_photo = cv2.resize(cropped_photo, (224, 224), interpolation=cv2.INTER_AREA)
+        return cropped_photo
+    else:
+        return None
 
 
 def preparePhotoTest(path):
