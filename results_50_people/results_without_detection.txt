@@ -1,0 +1,67 @@
+Test confusion matrix:
+[[36  0  0 ...  0  0  1]
+ [ 0 27  0 ...  0  0  2]
+ [ 0  0 50 ...  0  1  2]
+ ...
+ [ 0  0  0 ... 54  0  0]
+ [ 0  0  0 ...  0 16  1]
+ [ 0  0  0 ...  0  0  0]]
+Test classification report:
+                     precision    recall  f1-score   support
+
+          AdamArkin      0.973     0.750     0.847        48
+           AlanRuck      0.750     0.587     0.659        46
+       AlfreWoodard      0.943     0.877     0.909        57
+     AnjelicaHuston      1.000     0.885     0.939        52
+            BoDerek      0.929     0.750     0.830        52
+           BobSaget      0.547     0.783     0.644        60
+         ColmMeaney      0.781     0.595     0.676        42
+         DenisLeary      0.862     0.903     0.882        62
+      FrancesConroy      0.970     0.889     0.928        36
+          HulkHogan      0.889     0.545     0.676        44
+       JeffGoldblum      0.836     0.785     0.810        65
+       JesseVentura      0.625     0.882     0.732        51
+        JohnGoodman      0.964     0.981     0.972        54
+      JohnMalkovich      0.970     0.941     0.955        34
+       JohnTravolta      0.855     1.000     0.922        59
+       JohnTurturro      0.867     0.531     0.658        49
+         KarenAllen      0.756     0.708     0.731        48
+       KirstieAlley      0.955     0.889     0.921        72
+         KurtFuller      0.920     0.719     0.807        32
+         LiamNeeson      0.812     0.933     0.868        60
+MariaConchitaAlonso      0.846     0.880     0.863        50
+         MarkHamill      0.967     0.921     0.943        63
+          MelGibson      0.944     0.944     0.944        72
+    MelanieGriffith      0.962     0.893     0.926        56
+     MichaelEmerson      0.891     0.594     0.713        69
+      MichaelKeaton      0.816     0.656     0.727        61
+       MickeyRourke      0.894     0.737     0.808        57
+         NathanLane      0.570     0.828     0.675        64
+      PatrickSwayze      0.930     0.597     0.727        67
+         PaulHaggis      0.804     0.750     0.776        60
+              Rekha      0.786     0.764     0.775        72
+          ReneRusso      0.828     0.906     0.865        53
+         RobertDavi      0.974     0.809     0.884        47
+      RobertPicardo      0.833     0.714     0.769        56
+     RobertoBenigni      0.794     0.466     0.587        58
+      RobinWilliams      0.868     0.821     0.844        56
+     RolandEmmerich      0.645     0.714     0.678        56
+          RonHoward      0.923     0.923     0.923        52
+       RoseanneBarr      0.906     0.727     0.807        66
+      RowanAtkinson      0.659     0.871     0.750        62
+     SharonOsbourne      0.929     0.890     0.909        73
+       SteveBuscemi      0.810     0.825     0.817        57
+          SteveJobs      0.935     0.773     0.847        75
+        StevenBauer      0.926     0.641     0.758        39
+       StevenSeagal      0.851     0.667     0.748        60
+           TomHanks      0.540     0.985     0.698        68
+           TomHulce      0.733     0.688     0.710        32
+          TonyDanza      0.778     0.925     0.845        53
+       TonyShalhoub      0.831     0.947     0.885        57
+           TonyTodd      0.762     0.372     0.500        43
+            Unknown      0.000     0.000     0.000         0
+
+           accuracy                          0.790      2777
+          macro avg      0.826     0.768     0.786      2777
+       weighted avg      0.841     0.790     0.804      2777
+
